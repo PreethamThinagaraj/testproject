@@ -10,7 +10,7 @@ print("Test 2")
 print(os.getcwd())
 path = os.getcwd()
 
-with open('Models/Pickle_RL_Model.pkl', 'rb') as f:
+with open('Models/model.pkl', 'rb') as f:
     randomforest = pickle.load(f)
 
 
