@@ -11,7 +11,7 @@ print(os.getcwd())
 path = os.getcwd()
 
 with open('Models/model.pkl', 'rb') as f:
-    randomforest = pickle.load(f)
+    svm = pickle.load(f)
 
 
 
@@ -20,7 +20,7 @@ def get_predictions(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, 
     mylist = [float(i) for i in mylist]
     vals = [mylist]
 
-    return randomforest.predict(vals)[0]
+    return svm.predict(vals)[0]
 
 
 app = Flask(__name__)
@@ -51,9 +51,9 @@ def my_form_post():
         target = get_predictions(age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal)
 
         if target >= 0.5:
-            heart_disease = 'Heart Disease Present'
+            heart_disease = 'The person has Heart Disease'
         else:
-            heart_disease = 'Heart Disease Absent'
+            heart_disease = 'The person does not have Heart Disease'
 
         return render_template('home.html', target=target, heart_disease=heart_disease)
     else:
